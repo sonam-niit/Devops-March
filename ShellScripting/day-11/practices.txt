@@ -1,0 +1,14 @@
+
+
+now=$(date) # good
+now=`date`
+
+## avoid backticks use $(...)
+
+----------------------------------------
+
+creating script make it executable
+
+chmod +x  name-script.sh
+
+(give executable permission)
