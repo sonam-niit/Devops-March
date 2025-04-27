@@ -16,6 +16,7 @@ echo "changed ele: ${names[1]}"
 for name in "${names[@]}"; do 
     echo "$name"
 done
+
 ## iterate and store all values in one variable and lastly print variable
 ## after completing the loop
 result=''

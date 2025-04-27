@@ -1,0 +1,28 @@
+wap in python to check the given number is even or odd.
+wap in python to print first 100 even numbers
+wap in python to take selling price and purchase price
+    from user based on the the price provide its 
+    profit or loss. if profit how much profit?
+    if loss howmuch of loss?
+
+wap in python to take 10 number from users
+remove duplicates and print unique numbers.
+
+wap in python to create simple todolist     
+    create todos as list[]
+    function to addItem
+    function to removeItem
+    function see all items
+
+Shell Activities:
+----------------------------
+
+Automate the file renaming (take a folder and iterate through 
+all files and rename them with prefix pw_)
+
+Automate the file renaming (take a folder and iterate through 
+all files and rename them with suffix pw)
+
+Access a folder and check if the file exist inside that folder or not.
+
+write a script which creates a file and update the content of that file
