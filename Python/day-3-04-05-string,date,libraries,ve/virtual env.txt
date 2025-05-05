@@ -1,0 +1,58 @@
+In Python virtual Environment is isolated Environment which allows you to install 
+and manage dependencies seperately for diffrent projects.
+
+You can manage project packages seperately by avoiding conflicts.
+
+why?
+
+keep packages isolates.
+perevents version conflics 
+easily manage and share projects req to others.
+
+create virtual Environment:
+    python -m venv myenv
+
+it will cretae folder named myenv containing full
+isolated python environment.
+
+Activate:
+    myenv\Scripts\activate
+
+Now you are inside bash for your project
+    here if you execute below command:
+    pip install requests flask
+    (these 2 packages installed locally to this project)
+
+    to exit: type
+    deactivate
+
+once you outside from the project and now if you trying to execute the same install 
+command It will install those packages globally.
+
+
+************* Advanced dependencies management *************
+
+pipenv combines pip and virtual env into single tool.
+
+This automatically creates and manage virtual environment
+it keeps track of your packages in pipfile and pipenv.lock
+it also simplifies dependency installation, version control and 
+project sharing
+
+usage:
+    pip install pipenv
+
+you can create project folder
+    cd project-folder
+    pipenv install requests
+
+    (it means it will create virtual environment inside that
+    folder and also install requests dependency to it)
+
+    you can verify them by checking 2 files Pipfile and Pipfile.lock
+
+to go into environment shell (activate):
+    pipenv shell
+
+  to uninstall:
+        pip uninstall requests

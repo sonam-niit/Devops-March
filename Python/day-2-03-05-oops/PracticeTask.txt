@@ -1,0 +1,9 @@
+create class Account
+    variables:
+        holdename
+        AccountNo
+        Balance
+    methods:
+        getBalance()
+        diposit(self,amt)
+        withdraw(self,amt)

@@ -4,11 +4,12 @@ class Server:
         
     def start(self):
         return f"{self.name} is starting......."
-    
+
+#Apache Tomcat
 class WebServer(Server):
     def deploy(self):
         return f"Deploying web app on {self.name}"
-    
+# Jetty Server
 class ApplicationServer(Server):
     def deploy(self):
         return f"Deploying Application on {self.name}"
