@@ -1,0 +1,14 @@
+use this URL: https://books.toscrape.com/
+
+parse the data using BeautifulSoap
+
+find all books: (article)
+
+iterate all books
+    extract title
+    extract price
+    extract rating
+    extract link
+    print all
+
+If possiblee generate Dataframe from it using pandas
