@@ -1,0 +1,21 @@
+2025-05-11 10:37:45,934 - DEBUG - Debugging info
+2025-05-11 10:39:09,018 - DEBUG - Debugging info
+2025-05-11 10:39:09,018 - INFO - processing started
+2025-05-11 10:39:09,019 - WARNING - something is wrong
+2025-05-11 10:39:09,019 - ERROR - data process failed
+2025-05-11 10:39:09,019 - CRITICAL - system crash..!
+2025-05-11 10:39:22,040 - DEBUG - Debugging info
+2025-05-11 10:39:22,041 - INFO - processing started
+2025-05-11 10:39:22,041 - WARNING - something is wrong
+2025-05-11 10:39:22,041 - ERROR - data process failed
+2025-05-11 10:39:22,041 - CRITICAL - system crash..!
+2025-05-11 10:39:26,755 - DEBUG - Debugging info
+2025-05-11 10:39:26,756 - INFO - processing started
+2025-05-11 10:39:26,756 - WARNING - something is wrong
+2025-05-11 10:39:26,762 - ERROR - data process failed
+2025-05-11 10:39:26,762 - CRITICAL - system crash..!
+2025-05-11 10:43:15,300 - DEBUG - This is a Debug message
+2025-05-11 10:43:15,300 - INFO - This is a Info message
+2025-05-11 10:43:15,300 - WARNING - This is a Warning message
+2025-05-11 10:43:15,300 - ERROR - This is a Error message
+2025-05-11 10:43:15,300 - CRITICAL - This is a Critical message

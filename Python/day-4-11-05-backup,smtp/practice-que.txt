@@ -1,0 +1,11 @@
+Scenario:
+
+Create one Script:
+    1. parses the system logs
+    2. Create Backup file with error handling
+    3. check error exist
+    4. Notifies via email
+
+    above all 4 task creates in function form
+
+    

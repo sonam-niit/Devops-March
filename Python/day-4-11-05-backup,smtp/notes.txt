@@ -1,0 +1,20 @@
+Shutil module in python which provides high-level of file operations.
+More over it is used for copy, move and archiving the files and folders.
+
+Automating file Backups with timestamp archived creation
+    shutil: create archive
+    datetime: generate timestamp
+    os: to manage paths and directories
+
+Sending Emails in Python:
+---------------------------------
+use smtplib and email modules for sending emails, notification
+    alerts, reports and some automated task.
+
+smtplib:
+    it provides user for sending emails via SMTP (simple mail
+    transfer protocol)
+    connect with email servers like gmail,outlook etc..
+
+email: helping you to build email messages
+        include: subject, body, sender, receiver, attachments
