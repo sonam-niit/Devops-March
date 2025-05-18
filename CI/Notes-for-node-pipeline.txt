@@ -1,0 +1,40 @@
+For node project
+node must be installed in your system
+
+create configuration file: npm init -y
+(it will create package.json file)
+
+for installing dependencies
+npm i mocha --save-dev
+
+this will install dependencies after that for executing
+test commands add one script in test of your
+package.json file
+
+"test": "mocha tests/*.test.js"
+
+(run all files under the tests folder which ends with test.js
+extension)
+
+create src folder for source code
+create index.js file as main file (similar to main.py)
+
+for test cases:
+	create folder named tests
+	under that create one test case file (index.test.js)
+
+after that save all files and check it in your terminal 
+by executing below command:
+	npm run test
+
+(it should show the output with 3 test cases passed successfully)
+
+
+
+
+
+
+
+
+
+
