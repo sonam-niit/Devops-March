@@ -1,0 +1,17 @@
+
+Integration Testing Activity
+----------------------------------------------------
+
+load selenium driver
+launch chrome
+
+open facebook
+
+find element email and pass
+find login button 
+
+then click on that button
+
+wait for 5 seconds 
+
+close
