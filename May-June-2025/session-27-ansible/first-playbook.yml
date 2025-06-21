@@ -1,0 +1,12 @@
+---
+- name: Sample Playbook run with localhost
+  hosts: localhost
+  connection: local
+
+  tasks:
+  - name: say Hello
+    debug:
+      msg: "This a first Hello From Ansible"
+  - name: another Hello
+    debug:
+      msg: "Sample Debug Message"
