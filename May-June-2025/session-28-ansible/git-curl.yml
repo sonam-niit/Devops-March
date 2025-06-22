@@ -1,0 +1,32 @@
+---
+- name: install nginx Server
+  hosts: aws1
+  become: yes
+  tasks:
+  - name: Update APT package index
+    apt:
+      update_cache: yes
+  - name: Install git and curl
+    apt:
+      name: 
+        - git
+        - curl
+      state: present
+  - name: Check Git Version
+    command: git --version
+    register: git_version
+  - name: Display Git Version
+    debug:
+      msg: "Git version: {{ git_version.stdout }}"
+
+  - name: Use Curl Command to check Version
+    command: curl -s http://204.236.221.61/
+    register: curl_output
+
+  - name: Show Curl curl_output in lines of code
+    debug:
+      msg: "{{ curl_output.stdout_lines}}"
+
+  - name: Show Curl curl_output 5 lines of code
+    debug:
+      msg: "{{ curl_output.stdout_lines[:5]}}"

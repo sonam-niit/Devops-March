@@ -1,0 +1,8 @@
+Package Audit Report - generated {{ ansible_date_time.date }} {{ ansible_date_time.time }}
+===================================================================
+
+{% for name,ver in package_versions.items() %}
+* {{ name }}: {{ ver }}
+{% endfor %}
+
+Host: {{ inventory_hostname }}

@@ -1,0 +1,60 @@
+---
+- name: install git and curl packages
+  hosts: aws1
+  become: yes
+
+  vars:
+    packages:
+      - git
+      - curl
+    report_path: /tmp/package_audit.txt
+
+  tasks:
+    - name: Install required packages
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: true
+      loop: "{{ packages }}"
+      register: pkg_install_results
+      changed_when: false
+
+    - name: Capture package versions
+      command: "{{ item }} --version "
+      loop: "{{ packages }}"
+      register: version_cmd
+      changed_when: false
+
+    #make structured Template
+
+    - name: Assemble version dictionary
+      set_fact: 
+        package_versions: >-
+          {{
+              dict(
+              version_cmd.results |
+              map(attribute='item') | list |
+              zip(
+                version_cmd.results |
+                map(attribute='stdout') | list
+              )
+            )
+          }}
+
+    - name: Does a previous report exist?
+      stat:
+        path: "{{ report_path }}"
+      register: report_stat
+
+    - name: Backup Old report if exist
+      command: mv "{{ report_path }}" "{{ report_path }}.bak"
+      when: report_stat.stat.exists
+      register: backup_rc
+      changed_when: backup_rc.rc == 0
+
+    - name: Generate report 
+      template: 
+        src: templates/report.j2
+        dest: "{{ report_path }}"
+        owner: "{{ ansible_user | default('root') }}"
+        mode: "0644"
