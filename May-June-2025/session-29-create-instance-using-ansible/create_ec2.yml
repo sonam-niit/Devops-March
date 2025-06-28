@@ -1,0 +1,25 @@
+---
+- name: Launch EC2 Instance
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars_files:
+    - group_vars/all.yml
+
+  tasks:
+  - name: Launch EC2 instance
+    amazon.aws.ec2_instance:
+      name: "{{ tag_name }}"
+      key_name: "{{ key_name }}"
+      instance_type: "{{ instance_type }}"
+      image_id: "{{ ami_id }}"
+      region: "{{ aws_region }}"
+      count: 1
+      tags:
+        Environment: dev
+    register: ec2_result
+
+  - name: Output instance details
+    debug:
+      var: ec2_result

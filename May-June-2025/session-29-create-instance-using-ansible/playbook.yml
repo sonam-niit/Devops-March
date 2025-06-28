@@ -1,0 +1,7 @@
+---
+- name: Ping
+  hosts: web1
+  tasks:
+  - name: Ping EC2
+    ping:
+
