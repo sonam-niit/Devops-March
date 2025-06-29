@@ -1,13 +1,17 @@
 plugin: amazon.aws.aws_ec2
-
 regions:
   - us-east-1
+
 filters:
   instance-state-name: running
+  tag:Environment: dev
+
 keyed_groups:
-  - prefix: name
-    key: tags.Name
+  - key: tags.Name
+    prefix: env
+
 hostnames:
   - public-ip-address
+
 compose:
-  ansible_host: public_dns_name
+  ansible_host: public_ip_address

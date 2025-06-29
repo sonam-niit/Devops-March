@@ -1,7 +1,7 @@
 ---
-- name: Ping
-  hosts: web1
+- name: Ping test
+  hosts: all
+  gather_facts: no
   tasks:
-  - name: Ping EC2
-    ping:
-
+    - name: Ping the instance
+      ansible.builtin.ping:

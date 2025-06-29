@@ -15,6 +15,7 @@
       instance_type: "{{ instance_type }}"
       image_id: "{{ ami_id }}"
       region: "{{ aws_region }}"
+      security_group: "{{ security_group_name }}"
       count: 1
       tags:
         Environment: dev

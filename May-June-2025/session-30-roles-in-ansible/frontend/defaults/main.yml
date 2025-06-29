@@ -1,0 +1,3 @@
+---
+nginx_title: "Welcome to My Website"
+nginx_message: "Deployed using Ansible Role"

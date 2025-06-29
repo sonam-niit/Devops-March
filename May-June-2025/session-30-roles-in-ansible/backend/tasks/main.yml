@@ -1,0 +1,29 @@
+---
+- name: Install Python3 and pip
+  apt:
+    name:
+      - python3 
+      - python3-pip
+      - python3-flask
+    state: present
+    update_cache: yes
+
+# - name: Install flask
+#   pip:
+#     name: flask 
+
+- name: upload simple server code
+  copy:
+    dest: /home/ubuntu/app.py 
+    content: |
+      from flask import Flask
+      app = Flask(__name__)
+      @app.route('/')
+      def hello():
+          return "Hello From Backend"
+
+      if __name__ == '__main__':
+          app.run(port=5000)
+
+- name: Run Flask app in background
+  shell: nohup python3 /home/ubuntu/app.py &

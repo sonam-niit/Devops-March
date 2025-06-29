@@ -1,0 +1,17 @@
+Incase If you are getting error for .ansible folder permission
+
+1. Copy the project folder to /root
+
+sudo cp -r /mnt/d/path/to/your-ansible-project /root/ansible_project
+
+2. Switch to root user 
+sudo -i
+cd /root/ansible_project
+
+3. Make sure .pem file is in place, Move your .pem key under /root/.ssh/:
+
+mkdir -p /root/.ssh
+cp /home/sonam/.ssh/testsonam.pem /root/.ssh/
+chmod 400 /root/.ssh/testsonam.pem
+
+and then try to run ansible command
