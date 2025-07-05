@@ -1,0 +1,34 @@
+---
+# tasks file for roles/app
+- name: Install Dependencies
+  apt:
+    name: python3-pip
+    state: present
+
+- name: Install Flask and psycopg2 and dotenv
+  apt:
+    name:
+      - python3-flask 
+      - python3-psycopg2
+      - python3-dotenv
+
+- name: copy application code
+  copy: 
+    src: files/app/
+    dest: /home/ubuntu/app/
+    mode: '0755'
+
+- name: Set Environment Variables 
+  copy: 
+    dest: /home/ubuntu/app/.env 
+    content: |
+      DB_HOST=localhost
+      DB_USER=myappuser
+      DB_PASS=mysecretpassword
+      DB_NAME=myapp
+
+- name: Start Flask app
+  shell: |
+    FLASK_APP=/home/ubuntu/app/app.py flask run --host=0.0.0.0 --port=5000 &
+  args:
+    executable: /bin/bash
