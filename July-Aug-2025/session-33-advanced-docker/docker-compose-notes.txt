@@ -1,0 +1,20 @@
+Create one folder name docker-compose 
+
+    under that folder create 2 folders
+        backend:
+            backend code files
+            dockerfile
+        frontend:
+            frontend code files
+            dockerfile
+
+        docker-compose.yml
+
+this yml configuration configure the service for frontend, backend,
+database and networks
+
+you just need to run 1 command: sudo docke-compose up --build -d 
+ (it build images,create network, start containers)
+
+sudo docker-compose down
+    (stop containers, rm containers, remove network)

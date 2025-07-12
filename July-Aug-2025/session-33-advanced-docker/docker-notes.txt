@@ -1,0 +1,64 @@
+running a container directly in docker engine it stores the data inside the container.
+Its container's internal storage.
+
+When you delete the container your data will de deleted.
+
+If you want to persist your data after deleting the container as well then 
+you have to use docker volumes.
+
+step 1: create volume: docker volume create my_storage
+step 2: run container using this volume:
+        sudo docker run -d --name my-nginx -v my_storage:/usr/share/nginx/html -p 80:80 nginx
+step 3: go inside container and add some files 
+        sudo docker exec -it my-nginx sh
+        # cd /usr/share/nginx/html
+        # echo "hello world" > test.html
+        # ls
+        # cat test.html
+        # exit
+step 4: stop and remove container
+        sudo docker stop my-nginx
+        sudo docker rm my-nginx
+step 5: access the data of volume via temporary container
+        sudo docker run -it --rm -v my_storage:/data alpine sh
+        # cd /data
+        # ls
+        # exit
+
+======================================================================
+docker network
+
+let's try to create 2 containers and try to ping one from another
+
+sudo docker run -d --name server1 -p 8083:80 nginx
+sudo docker run -d --name server2 -p 8084:80 nginx
+
+sudo docker exec -it server1 sh
+    apt-get update
+    apt-get install iputils-ping
+    ping server2
+
+    (you can't communicate one container to another why?)
+
+container are not running under the common network
+let's create network
+docker network create my_net
+
+sudo docker run -d --name server1 -p 8083:80 --network my_net nginx
+sudo docker run -d --name server2 -p 8084:80 --network my_net nginx
+
+let's 3rd temp container to communicate server1 and 2
+sudo docker run -it --rm --network my_net alpine sh
+# ping server1
+ctrl + can
+
+#ping server2
+ctrl+c
+#exit
+
+
+
+
+
+
+

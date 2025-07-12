@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Project</title>
+</head>
+<body>
+    <h1>Frontend</h1>
+    <button onclick="fetchData()">Call Backend</button>
+    <p id="response"></p>
+    <script>
+        function fetchData(){
+            fetch('http://127.0.0.1:5000/api')
+            .then(resp=>resp.json())
+            .then(data=>document.getElementById('response').innerText
+        =data.message)
+        .catch(err=>console.log(err))
+        }
+    </script>
+</body>
+</html>

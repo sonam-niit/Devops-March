@@ -1,0 +1,28 @@
+services:
+
+  mysql:
+    image: mysql
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: flaskapp
+    ports:
+      - "3306:3306"
+    networks:
+      - app-network
+  backend:
+    build: ./backend
+    ports:
+      - "5000:5000"
+    networks:
+      - app-network
+
+  frontend:
+    build: ./frontend
+    ports:
+      - 80:80
+    networks:
+      - app-network
+
+networks:
+  app-network:
