@@ -1,0 +1,176 @@
+Kubernetes: open source container orchestration platform
+which is designed to automate the deployments, scaling and managing
+containers.
+
+-- manage multiple containers between multiple environments 
+we can solve using Kubernetes.
+
+Features:
+    Self Healing: auto restart, replace and rescheduling of failed
+                  containers
+
+    load balancing: Distribute traffic and provide high availability
+
+    Secret and config management: securing & managing secret data like
+                                    passwords API links
+
+Kubernetes componenets:
+
+1. Master Node: managing cluster and handles all the scheduling,  state management and updates.
+2. Worker Nodes: Actual Applications workload running here as pods.
+3. Pod: very smallest deployeble unit where you can run one or multiple containers.
+4. API Server: playing a role of main hub for communication between cluster and users.
+
+5. Controller Manager: managing the state by replication, load balancing
+
+6. Scheduler: assigns pods to nodes based on requirements.
+
+7. ETCD: storage for storing cluster data, stored in key-value pair
+
+8. Kubectl: agent which is running on each worker node to maintain container state in to 
+            its desired state.Its CLI tool
+        using that we can interact with Kubernetes cluster
+
+9. kube-proxy: managing the networking for all k8s service.
+
+
+MiniKube:
+------------------
+Its a tool which is used to set up  and run single node Kubernetes
+cluster for development and testing
+
+It provides environment to practice Kubernetes cluster without using 
+any full production cluster.
+
+
+setup Kubectl
+---------------------------------------
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
+
+echo "$(cat kubectl.sha256)  kubectl" | sha256sum --check
+(you can see the output kubectl: OK)
+
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+
+Check version:
+    kubectl version --client
+
+    kubectl version --client --output=yaml (to see detailed version)
+
+Work With Cluster Install MiniKube
+---------------------------------------------
+
+curl -LO https://github.com/kubernetes/minikube/releases/latest/download/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
+minikube start
+
+incase you are getting any driver error for docker run below commands:
+    sudo systemctl enable docker
+    sudo systemctl start docker
+    (run docker without sudo)
+        sudo usermod -aG docker $USER
+        newgrp docker
+    minikube start 
+
+once minikube started with cluster check cluster info
+> kubectl cluster-info
+
+check nodes:
+> kubectl get nodes
+    (you can see only master node control plane)
+
+Enabling minikube Dashboard
+----------------------------------------
+minikube dashboard
+
+incase if you are getting any browser error then use --url to get the url for dashboard
+instead directly opening in browser.
+
+> minikube dashboard --url
+
+url will be like this:
+http://127.0.0.1:38513/api/v1/namespaces/kubernetes-dashboard/services/http:kubernetes-dashboard:/proxy/
+
+Now let's create pods
+------------------------------
+> kubectl run my-pod --image=nginx --port=80
+
+> kubectl get pods
+
+>kubectl describe pod my-pod
+
+(check on your dashboard as well)
+
+Now to access output we can expose pod to service:
+     > kubectl expose pod my-pod --type=NodePort --port=80
+
+     > kubectl get services
+
+To access services: you can take cluster ip:nodeport where the service exposed.
+but to access on localhost directly use
+
+> minikube service service-name (minikube service my-pod)
+
+(you will be redirected in browser and you can see the output for the same)
+
+inscase wsl giving browser issue use --url flag and copy that url in browser.
+> minikube service my-pod --url
+
+To check all pods: kubetcl get pods
+to check all services: kubectl get services
+to see the details of service or pod:
+    kubectl describe pod pod-name
+    kubectl describe service service-name
+
+=======================================================================================
+delete pods or service:
+    kubectl delete pod my-pod
+    kubectl delete service my-pod
+======================================================================================
+
+running pod or service using commands is not a good practice
+create then using yml is the good approach.
+
+How to create yml file for Pod??
+-----------------------------------
+create my-pod.yml
+    (copy the default content from official documentation)
+    add the mentioned code here
+
+    kubectl apply -f my-pod.yml
+
+create my-service.yml
+    kubectl apply -f my-service.yml
+
+-- minikube service my-service --url
+
+(check url in browser)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

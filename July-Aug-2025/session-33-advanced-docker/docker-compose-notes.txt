@@ -13,7 +13,7 @@ Create one folder name docker-compose
 this yml configuration configure the service for frontend, backend,
 database and networks
 
-you just need to run 1 command: sudo docke-compose up --build -d 
+you just need to run 1 command: sudo docker-compose up --build -d 
  (it build images,create network, start containers)
 
 sudo docker-compose down
