@@ -1,0 +1,116 @@
+A pod is the smallest unit in kubernetes which is deployable. Inside a pod we 
+can run one or multiple containers.
+pod run containers, but they can not auto restart if they fails.
+
+create pod
+------------------
+    create file named pod.yml save it
+    kubectl apply -f pod.yml
+    kubectl get pods
+    kubectl describe pod name-pod
+    kubectl delete pod name-pod
+
+-- Replica Set 
+It is a specifying numbers of replicas which are running all the times.
+in case any replica pod fails then it will recreate in replicaset.
+
+    *********** Creating replicaset ***************
+    create replicaset.yml
+
+    kubectl apply -f replicaset.yml (add code from official page and change image)
+    kubectl get pods (in case its takes to start check it again you can see all ready)
+    kubectl delete pod any-pod-name 
+    (it will delete that but replicaset creates new one)
+    kubectl get pods (you can see containerCreating after some time it must be ready)
+
+    what if we want to scale them?
+    kubectl scale replicaset frontend --replicas=5
+    kubectl get pods (you can see 2 new containers are creating)
+    ---scale down
+    kubectl scale replicaset frontend --replicas=2
+    (it will complete 3 replicas and keep only 2 ready)
+    kubectl get pods
+    (if you try to apply your configuration again -- re run apply command)
+    kubectl apply -f replicaset.yml
+    (it will configure to its original)
+
+    kubectl delete replicaset frontend (this will not recreated)
+    kubectl get pods (either you can get pod status completed or it will removed)
+
+    *************** Deployment *********************
+    It provides all controller updates and the rollback features.
+    if any pod fails or any containers fails it can restrat automatically.
+
+creating Deployment
+----------------------------
+    create file deployment.yml (take code from documentation)
+    
+    kubectl apply -f deployment.yml
+    kubectl get deployment
+    kubectl get pods
+    kubectl delete pod name-of-pod (it will recreate)
+    kubectl get pods (check the age of the pod)
+
+    -- update the version
+    kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+
+    (i created deployment of 3 replicas using nginx version 1.14)
+    then i executed above command to rolling update the version 1.16.1
+
+    means cluster automatically scale down old version pods and scale up with
+    new updated version.
+
+    when you run describe command you can see the description
+    oldReplicaset and newreplicaSet
+
+    --- to see the rollout status
+    kubectl rollout status deployment/nginx-deployment
+
+    --- to see the detailed description
+        kubectl describe deployment/nginx-deployment
+
+    =========================================================
+    rolled back to the old version:
+    kubectl rollout undo deployment/nginx-deployment
+    again check rollout sttaus and also see the detailed description
+
+    incase to delete deployment
+    -- kubectl delete deployment/nginx-deployment
+
+
+****************  Deployment with annotatation ************
+create file as mentioned...
+kubectl apply -f deployment.yml
+    annotations:  
+    kubernetes.io/change-cause: started with version nginx:1.14.2
+kubectl get pods
+kubectl get deployment/nginx-deployment
+
+to update you can edit deployment.yml change image version
+    also update the annotatation to keep the version track
+
+    annotations:  
+    kubernetes.io/change-cause: updated with version nginx:1.16.1
+
+when you do apply again it will rollout
+    check roll out status: 
+        kubectl rollout status deployment/nginx-deployment
+    
+    check history: kubectl rollout history deployment/nginx-deployment
+
+incase if you roll back:
+    kubectl rollout undo deployment/nginx-deployment
+check history again:
+    kubectl rollout history deployment/nginx-deployment
+    (you can see it go back to the previous version)
+
+
+
+
+
+
+
+
+
+
+

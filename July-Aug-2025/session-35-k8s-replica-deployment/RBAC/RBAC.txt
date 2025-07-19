@@ -1,0 +1,29 @@
+RBAC: Role Based Access Control
+
+manage permission from diffrent users and services
+
+Create Service-Account
+-----------------------------------
+kubectl apply -f service-account.yml
+
+kubectl get sa
+kubectl get serviceaccount
+
+How to check user permission??
+-----------------------------------------
+kubectl auth can-i get pods --as=system:serviceaccount:default:dev-user
+kubectl auth can-i get secrets --as=system:serviceaccount:default:dev-user
+
+How to give the permission?? 
+create Role and then bind that role to that user.
+
+*********create role*******
+file role.yml
+
+kubectl apply -f role.yml
+kubectl get role
+
+********** Create RoleBinding **********
+file role-binding.yml
+
+kubectl apply -f role-binding.yml
