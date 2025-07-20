@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pvc-reader-pod
+spec:
+  containers:
+  - name: reader
+    image: busybox
+    command: ["/bin/sh", "-c"]
+    args: ["cat /data/test.txt && sleep 3600"]
+    volumeMounts:
+    - name: storage-volume
+      mountPath: /data
+  volumes:
+  - name: storage-volume
+    persistentVolumeClaim:
+      claimName: my-pvc

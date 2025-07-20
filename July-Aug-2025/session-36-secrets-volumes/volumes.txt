@@ -1,0 +1,91 @@
+Volumes in Kubernetes is  directory which is accessible to containers in a Pod.
+which is used to store and share data beyond the lifecycle of a 
+container process.
+
+Volume types:
+
+1. emptyDir : temporary storage shared by containers in a pod.
+
+2. hostPath : Mount a file/directory from the host node.
+
+3. PVC (persistence Volume Claim): Bind a persistence volume for durable storage.
+
+4. configMap/Secret: mount configuration map or secrets.
+
+5. awsEBS: use external cloud storages
+
+====== example of emptyDir volume ============
+create one file name empty-dir.yml
+
+kubectl apply -f volumes/empty-dir.yml 
+
+kubectl get pods
+
+(see both pods are running if yes then run below command)
+
+kubectl logs shared-volume-pod -c reader
+(you can see the logs for reader container)
+
+in above example one shared volume is accessible by all the containers running
+under the same pod.
+
+in this case when you delete pod the data will be lost. if container crash or 
+restarts then data remains there.
+
+for cheking logs:
+    kubectl logs shared-volume-pod
+    (it will show you the logs of default container as well as the 
+    available conatiners)
+
+if you want to see the perticular conatiner logs then
+    kubectl logs shared-volume-pod -c container-name 
+
+--------------------------------------------------------------
+PV - persistence volume which remains there after deleting the pod as well
+    (storage or disk which is provided by admin/dynamically)
+
+PVC: persistence volume Claim
+     a req provided by user for storage. 
+
+-- to persist data even if the pod deleted
+-- to decouple storage from the pod
+-- to enable dynamic provision of storage 
+
+Pod --> PVC --> PV --> Storage (Disk/cloud space)
+
+Pod uses a PVC
+PVC bind PV
+PV connects to the actual physical or cloud space
+
+========================================================
+let's define PV
+    create pv.yml
+    create pvc.yml
+    create pod.yml
+
+kubectl apply -f volumes/pv.yml
+kubectl apply -f volumes/pvc.yml
+kubectl apply -f volumes/pod.yml
+
+verify the volume status
+
+    kubectl get pvc
+    kubectl get pv
+    kubectl exec pvc-demo-pod -- cat /data/test.txt
+
+let's delete the pod and try to access data.
+kubectl delete pod pvc-demo-pod
+
+-- for reading the data let's create reader pod
+add reader-pod.yml
+    kubectl apply -f volumes/reader-pod.yml
+
+    kubectl get pods
+
+    kubectl logs pvc-reader-pod
+
+lastly don't forget to clear the resources.
+
+kubectl delete pod pvc-reader-pod
+kubectl delete pvc my-pvc
+kubectl delete pv my-pv
