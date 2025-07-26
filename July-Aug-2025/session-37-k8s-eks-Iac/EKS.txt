@@ -1,0 +1,157 @@
+Setup EKS Cluster and try to use Kebernetes live
+---------------------------------------------------
+
+AWS EKS (elastic Kubernetes Service)
+
+******* create cluster using eksctl *******
+
+setup eksctl in wsl (https://eksctl.io/installation/)
+
+# for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+ARCH=amd64
+PLATFORM=$(uname -s)_$ARCH
+
+curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+
+# (Optional) Verify checksum
+curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+
+tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+
+sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+
+**** Check ekctl version *****
+eksctl version
+
+********* Setup a Cluster ***********
+eksctl create cluster --name dev-cluster --region us-east-1 --nodegroup-name dev-nodes --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 5 --managed
+
+--name: Name of your cluster
+--region: AWS region (us-east-1)
+--node-type: EC2 Instance type
+--nodes: Number of instance in node group
+-- managed: managed node groups
+
+***** Update kubeConfig ***********
+so you can talk to your cluster
+
+ aws eks --region us-east-1 update-kubeconfig --name dev-cluster
+
+ **** Test your cluster *****
+
+kubectl get nodes
+kubectl get svc 
+
+*********** Deploy a Test App **********
+kubectl create deployment nginx --image=nginx
+
+kubectl expose deployment nginx --port=80 --type=LoadBalancer
+
+kubectl get svc
+
+(it will take time to get the load LoadBalancer External IP)
+you can see the LoadBalancer DNS there.
+
+looks like this: 
+http://a4ed3f31f561c416ba7d3ddad1ae1bef-958010524.us-east-1.elb.amazonaws.com/
+
+(this will provide default nginx page)
+
+you can check deployment logs
+-- kubectl logs deployment/nginx
+
+Once Everything is completed, makesure you stop your resources.
+-- kubectl delete service nginx
+-- kubectl delete deployment nginx
+
+*** delete cluster *****
+-- eksctl delete cluster --name dev-cluster --region us-east-1
+
+************* How Pods Distributed among nodes *************
+
+-- kubectl create deployment nginx --image=nginx --replicas=4
+
+-- kubectl get pods -o wide
+
+(you can see diffrent pods assigned with diffrent nodes)
+
+-- kubectl delete deployment/nginx
+
+-----------------------------------------------------------------
+********* Scale Pods Dynamically **********
+
+create one deployment.yml file
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
+
+**** enable autoscaling feature
+
+kubectl autoscale deployment nginx --cpu-percent=50 --min=2 --max=10
+kubectl get hpa
+(by default you can see 0%)
+
+*** Generate Load to use cpu
+
+ kubectl run load-generator --image=busybox -- /bin/sh -c "while true; do wget -q -O- http://nginx; done"
+
+you can check cpu load: kubectl get hpa again
+you can keep it in watch mode also -- kubectl get hpa -w 
+
+to increase more load: 
+    kubectl run load-generator1 --image=busybox -- /bin/sh -c "while true; do wget -q -O- http://nginx; done"
+    kubectl run load-generator2 --image=busybox -- /bin/sh -c "while true; do wget -q -O- http://nginx; done"
+    kubectl run load-generator3 --image=busybox -- /bin/sh -c "while true; do wget -q -O- http://nginx; done"
+
+just check cpu utilization if it cross 50% you can check
+    kubectl get pods
+
+        (you can see extra pod created -- scaling)
+
+    delete the load-generator pods and then again check the scaling down
+
+    kubectl delete pod load-generator
+    kubectl delete pod load-generator1    
+    kubectl delete pod load-generator2    
+    kubectl delete pod load-generator3
+
+again check kubectl get pods
+
+
