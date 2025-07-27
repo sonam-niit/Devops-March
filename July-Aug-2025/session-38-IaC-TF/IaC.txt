@@ -1,0 +1,62 @@
+IaC: infrastructure as a Code
+
+mordern approach for provisioning infrastructure (servers, databases, storage,
+load balancers, network) create using machine redable configuration file
+rather that manual process.
+
+when you do traditional set up it must be 
+    time consuming
+    error-prone (human error)
+    difficult to replicate
+
+This makes a developer life easier using code.
+
+IaC is having 2 approches (2 types)
+-----------------------------------------
+1. Declarative (What)
+-- Define  what you want (desired state)
+-- the tool (eg terraform) figures how to achieve it.
+-- terraform is using HCL
+
+2. Imperative (How):
+-- Define how the infra should be created.
+-- writing shell script
+-- AWS CLI
+
+*********** popular IaC tools *********
+
+1. terraform: multi-cloud, Declarative and state based.
+
+2. Chef/puppet: configuration management tool with having some IaC 
+                capabilities
+3. Ansible: configuration management + IaC
+
+Diffrence between terraform (IaC) and Ansible (CM)
+------------------------------------------------------
+terraform: more focused on provisioning servers and infrastructure.
+        -- creating Ec2 Instance, Create Bucket, VPC, Load balancers
+
+Ansible: focusing on set up software inside the server.
+        (installing packages with ansible)
+
+==============================================================
+IaC Workflow
+
+step 1: write a code (in terraform)
+
+step 2: store in version control (GitHub, GitLaB)
+
+step 3: Review and Test (review)
+
+step 4: Plan & Apply (show the changes to happen)
+
+step 5: deploy automatically (more integrated to CI/CD)
+
+
+
+
+
+
+
+
+
