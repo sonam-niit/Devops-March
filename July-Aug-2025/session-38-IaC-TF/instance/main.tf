@@ -18,7 +18,7 @@ resource "aws_instance" "server1" {
   systemctl start nginx
   EOF
 
-  depends_on = [ aws_security_group.web_sg.id ]
+  depends_on = [ aws_security_group.web_sg ]
 }
 
 resource "aws_security_group" "web_sg" {
