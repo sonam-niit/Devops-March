@@ -3,6 +3,8 @@ resource "random_id" "suffix" {
 }
 resource "aws_s3_bucket" "tf_state" {
   bucket = "${var.prefix}-${random_id.suffix.hex}"
+  force_destroy = true 
+  # to destroy non empty bucket
   tags = {
     Name = "Terraform State Bucket"
   }
