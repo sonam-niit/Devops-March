@@ -1,0 +1,45 @@
+Workspace: helping usto isolate state evironment within the same config
+directory.
+
+Let's Say we have multiple versions of the same infra like dev, staging and
+prod then use the same code but keep the state files seperate.
+
+To Create WorkSpace:
+terraform workspace new dev
+terraform workspace new prod
+
+This is helping us to create 2 seperate workspace:
+How to use Dev evironment:
+
+terrform workspace select dev
+terraform apply --var-file=dev.tfvar
+
+(cretae bucket named- sonamsoni-dev-dev)
+
+If you want to deploy in prod
+
+terrform workspace select prod
+terraform apply --var-file=prod.tfvar
+(create bucket sonamsoni-prod-prod with this name)
+
+The state will be maintained
+
+.terraform
+    terraform.tfstate
+    envs/   
+        dev/terraform.tfstate
+        prod/terraform.tfstate
+
+To run all commands to gether we can create script as well.
+run.sh file and add all comands in that file.
+
+For Also, to destroy reosources.
+terrform workspace select prod
+terraform destroy --var-file=prod.tfvar
+
+Cheking worksaces:
+
+terraform worksace list (to see all)
+terraform worksace show (show the current workspace)
+
+
