@@ -1,0 +1,66 @@
+Remote Backend
+
+by default when we are working with Terraform it uses local backend.
+It creates terraform.tfstate file which is stored locally.
+
+for managing remote backend we can create one resource like s3 bucket and 
+we can use tfstate file from bucket rather than using local one.
+
+If want to create backend manually then create one folder named project
+	modules
+		remote-backend
+			main.tf
+			variables.tf
+			outputs.tf
+	main.tf
+	outputs.tf
+	variables.tf
+
+save all files and then execute below commands.
+
+terraform init
+
+terraform validate
+
+terraform apply --auto-approve
+
+once its completed you can take the bucket name created and then create one file named backend.tf
+
+terraform {
+  backend "s3" {
+    bucket = "sonam-bucket-927fec3e" #replace with your bucket name
+    key = "terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
+save file and then execute below command.
+
+terraform init 
+confirm yes for remote backend and then your tfstate files maintaind by remote backend.
+
+******************************************************************************************
+
+In case if you don't want to run above mentioned command one by one then you can run shell scripting to execute all things 
+step by step.
+
+there is already run.sh file available in the code that executes all commands one by one take the bucket name from output raw 
+and then its creating backend.tf automatically and  then init shift local backend to remote backend.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
