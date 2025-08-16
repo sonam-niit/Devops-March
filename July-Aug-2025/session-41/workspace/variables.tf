@@ -5,4 +5,9 @@ variable "region" {
 variable "bucket_name" {
   type = string
   description = "Bucket name"
+  default = "sonamsoni"
+}
+variable "stage" {
+  type = string
+  description = "stage"
 }

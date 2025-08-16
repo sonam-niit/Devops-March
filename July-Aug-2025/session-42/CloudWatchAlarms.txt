@@ -1,0 +1,38 @@
+AWS Console
+search for cloud watch
+Navigate to Alarms --> All Alarms --> Create Alarm
+Choose Metric --> Browse --> EC2 --> Per-instance Metrics --> Select CPU utilization
+
+Also once side Open EC2 Dashboard and create 1 Amazon Linux instance.
+
+This Instance Id you need to add after selecting CPU utilization. --> click select Metric
+
+-- Define Conditions
+
+CPU utilization (unit-- by default percent)
+statistic -- average
+
+Condition:
+    thresold : statistic    
+    greater/Equal 80
+
+    (Alarm will trigger if CPU usage >= 80%)
+
+configure SNS Notification
+
+-- create new topic (enter email Id)
+
+Confirm the subscription -- for this open (Amazon SNS --> topics --> select your topic -->
+send request and then check your mails --> spam --> confirm and then check the confirmation)
+
+give the name and create
+=======================================================================
+Connect to your instance to increase stress
+
+sudo yum install stress -y 
+
+stress --cpu 2 --timeout 300 
+(Runs 2 CPU workers for 5 minutes)
+
+Go to the Cloud watch and see the graph
+you can see the status changes from OK to In Alarm

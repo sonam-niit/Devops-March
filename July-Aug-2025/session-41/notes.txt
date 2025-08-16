@@ -12,7 +12,7 @@ This is helping us to create 2 seperate workspace:
 How to use Dev evironment:
 
 terrform workspace select dev
-terraform apply --var-file=dev.tfvar
+terraform apply --var-file=dev.tfvars
 
 (cretae bucket named- sonamsoni-dev-dev)
 
