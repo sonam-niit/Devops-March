@@ -31,3 +31,43 @@ while true; do curl -s http://localhost:5000> /dev/null; sleep 1; done
 (run in terminal)
 
 you can see the results in prometheus
+
+Let's Setup Grafana dashboard
+localhost:3000
+
+will open login page where you can enter credentials mentioned in docker
+compose file which is admin, admin.
+
+skip the password change and you will be redirected to dashboard.
+
+Now let's configure prometheus in grafana.
+
+connections --> Add new connection --> search for the prometheus in
+data source --> select prometheus --> click on add new Data Source -->
+
+give datasource name: prometheus
+URL: http://prometheus:9090
+
+click on save and test
+
+if its gives successfully queries prometheus API
+then you can start creating your dashboard.
+
+click on building a dashboard and you can see dashboard screen.
+
+click on Add Visualization
+select datasource as prometheus
+
+you can add query below promQL tag 
+click on run queries and above you can see the graph.
+click on refresh and check
+
+to increase more load:
+-- sudo apt install apache2-utils
+-- brew install httpd (in mac)
+
+load the traffic send per second 100 req for 30 seconds.
+
+ab -n 3000 -c 100 http://localhost:5000/
+
+see the graph updates in grafana.
