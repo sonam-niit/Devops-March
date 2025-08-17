@@ -1,0 +1,20 @@
+Prometheus is open-source monitoring and alerting tool.
+
+It collects and stores real time-series data (metics) from the application
+servers and databases.
+
+works on pull model--> scraps metics from application and expose
+endpoint.
+
+Own query language PromQL
+also send alerts via AlertManager.
+
+*** Why Grafana ???
+grafana is open-source visualization and dashboard tool.
+
+-- it's not collecting data itself but connects with the data source like
+Prometheus, MySQL, CloudWatch, ElasticSerch ...
+
+-- Build interactive dashboards from collected data.
+
+-- provides alerts, graphs and visualization.

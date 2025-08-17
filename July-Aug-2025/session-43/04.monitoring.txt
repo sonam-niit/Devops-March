@@ -1,0 +1,33 @@
+create folder named monitoring demo where want to setup 
+prometheus, grafana for Python App
+
+inside this folder set up
+app.py (for python code and prometheus-metrics)
+Dockerfile to create image of app
+prometheus.yml to configure targets in prometheus
+requirements.txt to set up dependencies
+docker-compose.yml to set up 3 services
+
+To run the same:
+    docker-compose up -d --build
+check result
+    docker ps 
+3 services running now
+    localhost:9090 prometheus dashboard
+    localhost:3000 grafana dashboard
+    localhost:5000 python app
+
+localhost:9090/targets (you can see the services ups or not)
+localhost:5000/ - trigger to send req to your web app
+localhost:5000/metrics (see prometheus metrics)
+
+refresh multiple times: localhost:5000 to send req
+
+in prometheus query: http_requests_total -- Execute
+(below you can see the results)
+
+to send contiue req per second:
+while true; do curl -s http://localhost:5000> /dev/null; sleep 1; done
+(run in terminal)
+
+you can see the results in prometheus

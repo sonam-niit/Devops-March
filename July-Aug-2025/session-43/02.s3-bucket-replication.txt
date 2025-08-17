@@ -1,0 +1,23 @@
+It is bucket level automatic Replication
+
+step:
+
+1. create 2 buckets you can create them in diffrent region or in
+another account.
+    source_bucket_001
+    dest_bucket_001
+
+    make sure you enable versioning in both.
+
+2. In source Bucket --> Management --> Replication
+    create rule
+
+        choose destination bucket (dest_bucket_001)
+
+destination bucket will replication all your source bucket data.
+also select all objects or just a prefix.
+
+Now, every new upload/update is replicaated to dest bucket not
+the older one.
+
+(Execute this later as task)

@@ -1,0 +1,23 @@
+IN AWS Backup can be taken using EBS Snapshot
+
+Create any instance by default instance having default volume
+that will be deleted when intance terminated.
+
+You can attach external volume by using EBS
+Volume--> Create new Volume --> General Purpose SSD -->
+tags (Name: name_of_your_volume)
+
+make sure you create volume in the same availability zone where your 
+instance created.
+
+To connect this volume to your instance -- select volume -- attach to
+your instance.
+
+then you can check instance storage properties.
+
+For taking up the backup select snapshot, create snapshot, select volume
+which volumes backup you want to take.
+
+Whenever you wnat to restore it you can create new volume
+select snapshot id and then attach it to your instance and it will
+be retsrored.
