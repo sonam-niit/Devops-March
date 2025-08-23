@@ -1,0 +1,79 @@
+ELK : Elasticsearch, logstash, Kibana
+
+Elasticsearch (E):
+    It is database (search engine + storage)
+    
+    stores logs and makes then searchable and queryable.
+
+    powerful for full-text search and analytics.
+
+logstash (L):
+
+    It is a pipeline/ processor
+
+    collects logs from the diffrenct sources.
+
+    Tranforms / parse /filter logs
+
+    then it will send the cleaned data to Elasticsearch.
+
+Kibana (K): UI/Dashboard
+        visualize and analyze logs stored in Elasticsearch
+
+        you can search logs, build dashboard, create alerts
+
+
+here to set up ELK create one folder named elk-project
+
+inside that create 2 files docker-compose.yml and logstash.conf
+
+save them , open in wsl and then do 
+
+sudo sysctl -w am.max_map_count=262144 (elasticsearch req this)
+sudo service docker start
+
+docker-compose up -d 
+docker ps (check if all conatiners up then)
+
+localhost:9200 (Elasticsearch)
+localhost:5601 (Kibana)
+
+it will take some time to up the things
+you can check logs as well
+
+docker logs elasticsearch 
+docker logs kibana 
+
+now you create one file named app.py: add the mentioned code
+run it: python3 app.py in wsl
+
+now you see your logs in kibana dashboard. to generate that.
+localhost:5601
+
+left panel: discover --> create index pattern
+
+type: python-logs-* 
+then select timestamp create pattern
+
+click on discover again and you can see the logs of your application to kibana 
+
+********* Whats actually executing *************
+
+Python App sends raw JSON logs --> Logstash --> received on port 5044
+pushes it to elasticsearch with proper format
+
+elasticsearch stores it in index like python-logs-date... format
+
+if you want to get that data you can search:
+GET python-logs-2025.08.23/_search
+find our app logs
+
+In Kibana you can search
+    Python log #5
+
+    
+
+
+
+
+

@@ -1,0 +1,17 @@
+docker-compose up -d (up your 3 containers)
+
+check docker ps 
+
+once up then check localhost:9200 
+localhost:5601
+
+run python app:: python3 -m venv && source .venv/bin/activate
+pip install -r requirements.txt
+python app.py
+
+open another termina and send some requuest to trigger apis
+you can from browser also or use curl command
+
+curl "http://localhost:8081/hello?name=Sonam"
+curl "http://localhost:8081/hello?name=ELK"
+curl -i "http://localhost:8081/boom"   # 500 error on purpose
