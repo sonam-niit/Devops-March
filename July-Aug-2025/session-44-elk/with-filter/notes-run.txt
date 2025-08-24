@@ -15,3 +15,8 @@ you can from browser also or use curl command
 curl "http://localhost:8081/hello?name=Sonam"
 curl "http://localhost:8081/hello?name=ELK"
 curl -i "http://localhost:8081/boom"   # 500 error on purpose
+
+again go to kibans dash
+discover type index pattern demo-logs-* add
+
+refresh and check your application logs.
