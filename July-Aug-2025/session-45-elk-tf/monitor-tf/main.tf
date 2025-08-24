@@ -16,9 +16,9 @@ resource "aws_security_group" "elk_sg" {
   dynamic "ingress" {
     for_each = var.allowed_cidrs
     content {
-        description = "Kibana"
-        from_port = 5601
-        to_port = 5601
+        description = "Grafana"
+        from_port = 3000
+        to_port = 3000
         protocol = "tcp"
         cidr_blocks = [ingress.value]
     }
@@ -26,9 +26,9 @@ resource "aws_security_group" "elk_sg" {
   dynamic "ingress" {
     for_each = var.allowed_cidrs
     content {
-        description = "ElasticSearch"
-        from_port = 9200
-        to_port = 9200
+        description = "Prometheus"
+        from_port = 9090
+        to_port = 9090
         protocol = "tcp"
         cidr_blocks = [ingress.value]
     }
@@ -40,32 +40,23 @@ resource "aws_security_group" "elk_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"]
-
   filter {
     name   = "name"
     values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"] 
   }
-
   filter {
     name   = "virtualization-type"
     values = ["hvm"]
   }
 }
-resource "aws_instance" "elk" {
+resource "aws_instance" "grafana_host" {
   ami = data.aws_ami.ubuntu.id
   instance_type = local.instance_type
-  key_name = "linuxkey"
-  vpc_security_group_ids = [aws_security_group.elk_sg.id]
+  key_name = local.key_name
+  vpc_security_group_ids = [ aws_security_group.elk_sg.id ]
   user_data = file("${path.module}/user_data.sh")
-  root_block_device {
-    volume_size = 40
-    volume_type = "gp3"
-  }
-
-  tags = {
-    Name="ELK-Instance"
-  }
 }
