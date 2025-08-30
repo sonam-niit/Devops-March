@@ -40,10 +40,12 @@ chmod 755 /var/log/myapp
 
 after this try to run it again python3 app.py
 
-to access logs locally: cat /var/log/myapp
+to access logs locally: cd /var/log/myapp
 check files: ls 
 check logs: cat app.log
 (you can see all application logs here)
+
+combile all above 3 commands: cat /var/log/myapp/app.log
 
 To send logs to CloudWatch wecan configure cloud CloudWatch
 to the Instance
@@ -83,10 +85,19 @@ create configuration file for cloudwatch on EC2
 sudo chown ec2-user:ec2-user /opt/aws/amazon-cloudwatch-agent/bin
 chmod 755 /opt/aws/amazon-cloudwatch-agent/bin
 
+create file: nano /opt/aws/amazon-cloudwatch-agent/bin/config.json
+
 After this we need to run amazon-cloudwatch-agent to send logs to cloudwatch
 
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
-> -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl > -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+
+amazon-cloudwatch-agent-ctl : amazon cloud script to run
+which you can run with start, stop, fetch-config and restart
+
+-a (action) fetch-config (fetch the configuration how to run)
+-m mode, ec2 = running on ec2 instance
+-c is the configuration file and then the whole path of that config.json file
+-s start immediately after applying the config
 
 after running this command your python logs will appear in cloudwatch
 logs under /myapp/logs
