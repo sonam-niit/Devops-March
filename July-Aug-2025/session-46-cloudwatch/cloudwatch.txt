@@ -1,0 +1,92 @@
+CloudWatch
+
+AWS monitoring and obsrvability service.
+
+-- collect logs from EC2, Lambda, ECS
+-- Collect metrics (CPU, memory, custom metrics)
+-- create alarms (notify when thresold are breached)
+-- create dashboards to visualize metrics
+
+*********** CloudWatch Logging **************
+
+Create Amazon Linux Instance for running app and write logs to CloudWatch.
+
+In security group make sure you open 22 ssh and custom tcp 5000.
+
+Connect with the Instance and create file named app.py as shown here.
+
+nano app.py (paste code and ctrl+O enter ctrl+x)
+install python and pip: 
+    sudo yum update -y 
+    sudo yum install -y python3 python3-pip
+    python3 --version
+    pip3 --version
+
+    pip3 install flask
+
+    python3 app.py
+
+verify app is running or not:
+    <public-ip>:5000/hello
+    <public-ip>:5000/error
+
+if both are working means we are able to write logs locally
+
+incase if you are geeting error while running application for permission.
+
+sudo mkdir -p /var/log/myapp
+sudo chown ec2-user:ec2-user /var/log/myapp
+chmod 755 /var/log/myapp
+
+after this try to run it again python3 app.py
+
+to access logs locally: cat /var/log/myapp
+check files: ls 
+check logs: cat app.log
+(you can see all application logs here)
+
+To send logs to CloudWatch wecan configure cloud CloudWatch
+to the Instance
+
+install cloud watch Agent
+
+-- sudo yum install -y amazon-cloudwatch-agent
+
+Setup cloudwatch -- open cloudwatch on amazon console and create below mentioned config:
+
+to configure cloudwatch we need to create log group
+/myapp/logs
+
+To send logs from instance to cloudwatch we need to set the permission
+and attach permission to the instance
+
+we need to create role
+AWS Console --> IAM --> Roles --> Create Role
+
+in trusted entity: AWS service
+Use Case: EC2
+
+attach policy: CloudWatchAgentServerPolicy
+RoleName:  EC2CloudWatchAgentRole
+
+Attach role to EC2:
+    EC2-> Instance --> select Instance --> Actions -->
+    Security --> Modify Iam Role --> attach created role
+
+ curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
+
+ (169.254.169.254 this is special local IP used by instance to access metadata service)
+
+create configuration file for cloudwatch on EC2
+/opt/aws/amazon-cloudwatch-agent/bin/config.json
+
+sudo chown ec2-user:ec2-user /opt/aws/amazon-cloudwatch-agent/bin
+chmod 755 /opt/aws/amazon-cloudwatch-agent/bin
+
+After this we need to run amazon-cloudwatch-agent to send logs to cloudwatch
+
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl \
+> -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+
+after running this command your python logs will appear in cloudwatch
+logs under /myapp/logs
