@@ -1,0 +1,33 @@
+Let's Create ALB - Application Load balancer
+
+to implement the same first of all Create 2 ubuntu instances.
+
+create instance --> AMI ubuntu --> sec group with 22 and 80 port
+in vpc --> select default --> select subnets like 1b,1c
+create instance.
+
+connect both instance one by one and execute below commands
+    sudo apt update
+    sudo apt install nginx -y 
+    cd /var/www/html
+    sudo nano index.html (add some message <h1>hello from Server 1</h1>)
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
+
+Create Target Groups ---> 
+    instances --> keep all others as default and next
+    then here select instances that you want to add then click on
+    add pending targets below and then create target group.
+
+Create Load balancer--> Application Load balancer
+name , scheme -- internet facing, Ip -- Ipv4
+vpc -- default, select availability zones in place you have created instance.
+
+sec group- default and you instance sec group.
+
+listener --> HTTP --> in default action select target group created.
+
+create load balancer.
+
+once its created you can see the DNS to handle HTTP req
+when you send req you can see the response from any one of your instance
