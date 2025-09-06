@@ -1,0 +1,24 @@
+https://docs.aws.amazon.com/cli/latest/reference/iam/
+
+to list all users: aws iam list-users
+
+get individual user details:
+    aws iam get-user \
+    --user-name SonamSoni
+
+attach user policy:
+    aws iam attach-user-policy \
+    --policy-arn arn:aws:iam::aws:policy/AdministratorAccess \
+    --user-name SonamSoni
+
+Task********
+--------------
+explore service provided by :
+        ACM : AWS Certificate Manager
+        WAF: Web Application Firewall
+        ASG : Auto Scalling Group
+
+Also Check for KMS: Key management service
+    how encryption works here.
+
+    

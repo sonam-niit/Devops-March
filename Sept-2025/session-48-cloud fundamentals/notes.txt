@@ -1,0 +1,10 @@
+ec2 instance (pricing)
+us-east-1 --> 0.096/hour
+ap-south-1 --> 0.111/hour
+
+Latency
+---------------
+closer region --> lower Latency --> Better Performance
+
+India -> deploy app in mumbai ap-south-1 latency --> 50ms
+India -> deploy app in us-east-1 latency --> 200-300ms --> slow exp

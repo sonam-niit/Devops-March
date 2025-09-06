@@ -1,0 +1,51 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: CloudFormation Template for WebServer with Security Group and EC2 Instance
+
+Parameters:
+  LatestAmiId:
+    Description: The latest Amazon Linux 2 AMI from the Parameter Store
+    Type: 'AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>'
+    Default: '/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2'
+
+  InstanceType:
+    Description: WebServer EC2 instance type
+    Type: String
+    Default: t2.micro
+    AllowedValues:
+      - t3.micro
+      - t2.micro
+    ConstraintDescription: must be a valid EC2 instance type.
+    
+Resources:
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP access via my IP address
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+
+  WebServer:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref InstanceType
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      UserData: !Base64 |
+        #!/bin/bash
+        yum update -y
+        yum install -y httpd
+        systemctl start httpd
+        systemctl enable httpd
+        echo "<html><body><h1>Hello World!</h1></body></html>" > /var/www/html/index.html
+
+Outputs:
+  WebsiteURL:
+    Value: !Join
+      - ''
+      - - http://
+        - !GetAtt WebServer.PublicDnsName
+    Description: Website URL

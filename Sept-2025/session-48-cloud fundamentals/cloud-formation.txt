@@ -1,0 +1,44 @@
+AWS CFN -- AWS Cloud formation -- IaC 
+
+Automates Provisioning and management of AWS Resources.
+infra we can define in template with YAML/JSON
+
+AWS Config -- Compliance and Drift Detection
+tracks state and Compliance
+
+Clouf formation= build and define infra
+AWS Config = Monitor / tracks changes
+
+To create Infra using cloud formation
+https://console.aws.amazon.com/cloudformation/
+
+On the Create stack page, choose Build from Infrastructure Composer, and then Create in 
+Infrastructure Composer. This takes you to Infrastructure Composer in CloudFormation 
+console mode where you can upload and validate the template.
+
+use the template added here template.YAML --> next --> next 
+
+create stack.
+
+Once the status is completed check the output where you can see the link.
+
+you can access Hello World output from the same.
+
+So to create Cloud formation using cli use below commands
+----------------------------------------------------------
+
+aws cloudformation create-stack --stack-name WebAppStack 
+--template-body file://template.yml 
+
+to see the output: aws cloudformation describe-stacks --stack-name WebAppStack
+
+you can see the outputs under the output section: where you can see the
+dns of instance created.
+
+check the link you can access Hello World in Browser.
+
+to delete stack:
+aws cloudformation delete-stack --stack-name WebAppStack
+
+check the status using describe-stack command so you can see the status
+like delete in progress.
