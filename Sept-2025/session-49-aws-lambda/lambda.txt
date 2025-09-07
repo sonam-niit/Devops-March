@@ -1,0 +1,56 @@
+aws console --> search for lambda --> click on same
+create function --> srach from author --> function name (MyFirstLambda)
+Runtime --> Python 3.13 -->Arch x86_64 --> create function
+
+check the code --> deploy undeployed changes
+move to test tab and click on test and check output.
+
+open function --> Add trigger --> trigger config --> select source
+API Gateway --> create new API --> REST API --> Security (Open)
+--> Add
+
+once created click on API Gateway --> Copy API endpoint
+run in browser and check response.
+
+Process using CLI::
+create folder named project
+move to the colder 
+create file: lambda_function.py  (add given code)
+zip it: zip function.zip lambda_function.py
+
+create IAM role for Lambda 
+create policy file: trust-policy.json
+run below command: aws iam create-role 
+                    --role-name lambda-ex-role 
+                    --assume-role-policy-document file://trust-policy.json
+
+Attach policy::
+
+aws iam attach-role-policy 
+--role-name lambda-ex-role 
+--policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+create lambda function
+
+aws lambda create-function \
+    --function-name hello-lambda-cli \
+    --runtime python3.9 \
+    --role arn:aws:iam::277707128105:role/lambda-ex-role \
+    --handler lambda_function.lambda_handler \
+    --zip-file fileb://function.zip
+
+invoke created function:
+aws lambda invoke --function-name hello-lambda-cli response.json
+
+check response.json to see output.
+
+create APIgateway using the CLI: (Task)
+
+later on delete all resources.
+
+aws lambda delete-function --function-name hello-lambda-cli
+aws iam detach-role-policy \
+--role-name lambda-ex-role \
+--policy-arn arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+
+aws iam delete-role --role-name lambda-ex-role 
