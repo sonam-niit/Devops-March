@@ -9,7 +9,9 @@ each function can use upto 5 layers.
 
 Let's implement layer step by step
 ---------------------------------------
-create folder named python/ logger.py file
+create folder named layer/python/logger.py file
+
+(create folder structure just like above and then zip)
 
 zip the python folder:
     zip -r my-logging-layer.zip python
@@ -33,19 +35,21 @@ create lambda function 1
 add below code to your function:
 ---------------------------------------------
 import json
-import logger from get_logger
+from logger import get_logger
 
-logger = logger.get_logger("OrderProcessor")
+logger = get_logger("OrderProcessor")
 
 def lambda_handler(event, context):
-    logger.info("Processing order event")
-    logger.debug(f"Event Details: {json.dump(event)}")
+    logger.info("Processing Order event")
+    logger.debug(f"Event Details: {json.dumps(event)}")
+
     return {
         "statusCode": 200,
         "body": json.dumps({
             "message": "Order processed successfully"
         }),
     }
+
 
 once the function created go to layer --> add layer-->
 custom layer and select layer which we have created
@@ -54,8 +58,27 @@ same process repeat for PaymentProcessor function
 create function
     PaymentProcessor
 
-    add the code as above just change messages from order to payment 
+code:
 
+import json
+from logger import get_logger
+
+# initialize logger at cold start
+logger = get_logger("PaymentProcessor")
+
+def lambda_handler(event, context):
+    logger.info("Processing Payment event")
+    logger.debug(f"Event Details: {json.dumps(event)}")
+
+    return {
+        "statusCode": 200,
+        "body": json.dumps({
+            "message": "Payment processed successfully"
+        }),
+    }
+
+
+    add the code as above just change messages from order to payment 
     here also attach the layer 
 
 go to the test tab create test 
