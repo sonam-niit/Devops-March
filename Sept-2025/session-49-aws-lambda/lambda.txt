@@ -45,6 +45,12 @@ aws lambda invoke --function-name hello-lambda-cli response.json
 check response.json to see output.
 
 create APIgateway using the CLI: (Task)
+https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-rest-api.html
+https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-resources.html
+https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-method.html
+https://docs.aws.amazon.com/cli/latest/reference/apigateway/put-integration.html
+https://docs.aws.amazon.com/cli/latest/reference/apigateway/create-deployment.html
+
 
 later on delete all resources.
 
