@@ -75,3 +75,27 @@ pip install flask pymysql
 ```bash
 python3 app.py
 ```
+5. Check the output: Go to browser and access this link:
+<public_ip:5000/>
+
+# Use Environment Variables with Application
+
+1. in existing app.py file import os module and access data from env
+
+```python
+import os
+
+db_host=os.environ["DB_HOST"]
+db_user=os.environ["DB_USER"]
+db_pass=os.environ["DB_PASS"]
+db_name=os.environ["DB_NAME"]
+
+```
+2. export below variables in your ec2 instance
+```bash
+export DB_HOST="<ENDPOINT>"
+export DB_USER="<MASTER_USERNAME>"
+export DB_PASS="<MASTER_PASSWORD>"
+export DB_NAME="<DATABASE_NAME>"
+```
+3. Run the application again

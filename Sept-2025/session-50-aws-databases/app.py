@@ -1,12 +1,13 @@
 from flask import Flask
 import pymysql
+import os
 
 app= Flask(__name__)
 
-db_host="pw.c8xaeuki2r7w.us-east-1.rds.amazonaws.com"
-db_user="admin"
-db_pass="Sonam_skills.pw.live"
-db_name="ecom"
+db_host=os.environ["DB_HOST"]
+db_user=os.environ["DB_USER"]
+db_pass=os.environ["DB_PASS"]
+db_name=os.environ["DB_NAME"]
 
 @app.route("/")
 def home():
