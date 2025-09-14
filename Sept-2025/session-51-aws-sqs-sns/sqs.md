@@ -49,3 +49,49 @@ aws sqs send-message \
 aws sqs receive-message \ 
 --queue-url <queue_url>
 ```
+
+#### You can also try this by using from Console there is option so send and receive messages
+
+1. Send message
+    ```json
+    {
+        "order_id":1, 
+        "item":"Pizza", 
+        "quantity":2
+    }
+    ```
+2. Poll For message as well.
+
+## Connect SQS with lambda for Message processing 
+
+Let's Create Lambda Function:
+
+1. AWS Console --> Lambda
+2. Create function --> name (sqs-message-processor)
+3. create
+4. IAM --> Roles --> Select --> Lambda role --> attach policy
+5. AWSLambdaSQSQueueExecutionRole --> update it
+6. In lambda --> click Add Trigger
+7. select sqs --> select created sqs queue
+8. in Lambda add below lines of code:
+
+```python
+def lambda_handler(event, context):
+    for record in event['Records']:
+        message = record['body']
+        print(f"New Message received: {message}")
+    return {
+        'statusCode': 200,
+        'body': "Messages Processed Successfully"
+    }
+```
+
+9. Once code added click on deploy
+10. go back to your sqs queue and try to send some messages.
+11. To watch those logs
+12. cloudwatch --> loggroup --> open your lambda log-group and 
+13. check logs
+
+
+
+
