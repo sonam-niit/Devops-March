@@ -93,5 +93,23 @@ def lambda_handler(event, context):
 13. check logs
 
 
+### To Execute the same with python code use belo steps
 
+1. create customer.py as shown here
+2. cretae kitchen.py as shown here
+3. setup VEnv to run program
+```bash
+python3 -m venv myenv
+source myenv/bin/activate
+pip install boto3
+python3 kitchen.py
+```
+
+4. after this run customer.py in diffrent terminal
+```bash
+python3 customer.py
+```
+
+#### If you are using same sqs then make sure you remove trigger
+#### other wise all orders handled by trigger and deleted.
 
