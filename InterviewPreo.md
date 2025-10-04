@@ -26,118 +26,118 @@
 
 **Linux & Shell Scripting**
 
-What is the difference between apt update and apt upgrade?
-How do you check running processes in Linux?
-What is the purpose of /etc/passwd?
-How do you schedule a cron job? Example?
-Difference between hard link and soft link?
-What is the purpose of the chmod command?
-What is grep, and how is it used?
-What does top or htop command do?
-How to check disk usage and memory usage?
-Write a shell script to print even numbers from 1 to 20.
+1. What is the difference between apt update and apt upgrade?
+2. How do you check running processes in Linux?
+3. What is the purpose of /etc/passwd?
+4. How do you schedule a cron job? Example?
+5. Difference between hard link and soft link?
+6. What is the purpose of the chmod command?
+7. What is grep, and how is it used?
+8. What does top or htop command do?
+9. How to check disk usage and memory usage?
+10. Write a shell script to print even numbers from 1 to 20.
 
 **CI/CD – Jenkins, GitHub Actions**
 
-What is a CI/CD pipeline?
-How does Jenkins automate builds?
-What are Jenkins agents (nodes)?
-How do you trigger a Jenkins job automatically on a Git push?
-What are Jenkins plugins?
-Explain a simple Jenkins pipeline with stages (build, test, deploy).
-What is the difference between freestyle and pipeline jobs in Jenkins?
-What is a webhook in GitHub Actions?
-How can you schedule builds using Jenkins or GitHub Actions?
-How can you pass secrets securely in Jenkins pipelines?
+1. What is a CI/CD pipeline?
+2. How does Jenkins automate builds?
+3. What are Jenkins agents (nodes)?
+4. How do you trigger a Jenkins job automatically on a Git push?
+5. What are Jenkins plugins?
+6. Explain a simple Jenkins pipeline with stages (build, test, deploy).
+7. What is the difference between freestyle and pipeline jobs in Jenkins?
+8. What is a webhook in GitHub Actions?
+9. How can you schedule builds using Jenkins or GitHub Actions?
+10. How can you pass secrets securely in Jenkins pipelines?
 
 **Docker & Containerization**
 
-What is Docker, and why is it used?
-What is the difference between a container and a virtual machine?
-What is a Dockerfile?
-Explain key Dockerfile instructions (FROM, RUN, CMD, COPY, EXPOSE).
-What is a Docker image vs container?
-What is the purpose of docker-compose?
-How do you view running containers?
-What is the difference between docker run and docker start?
-What are Docker volumes used for?
-How do you remove dangling images?
+1. What is Docker, and why is it used?
+2. What is the difference between a container and a virtual machine?
+3. What is a Dockerfile?
+4. Explain key Dockerfile instructions (FROM, RUN, CMD, COPY, EXPOSE).
+5. What is a Docker image vs container?
+6. What is the purpose of docker-compose?
+7. How do you view running containers?
+8. What is the difference between docker run and docker start?
+9. What are Docker volumes used for?
+10. How do you remove dangling images?
 
 **Kubernetes (K8s)**
 
-What problem does Kubernetes solve?
-What is a Pod in Kubernetes?
-What is a Deployment?
-What is a Service in Kubernetes?
-What is a ReplicaSet?
-Difference between StatefulSet and Deployment?
-What is kubectl, and how is it used?
-How do you scale a deployment in Kubernetes?
-What is a ConfigMap vs Secret?
-What is the role of the Kubelet?
+1. What problem does Kubernetes solve?
+2. What is a Pod in Kubernetes?
+3. What is a Deployment?
+4. What is a Service in Kubernetes?
+5. What is a ReplicaSet?
+8. Difference between StatefulSet and Deployment?
+9. What is kubectl, and how is it used?
+10. How do you scale a deployment in Kubernetes?
+11. What is a ConfigMap vs Secret?
+12. What is the role of the Kubelet?
 
 **Cloud (AWS / Azure / GCP)**
 
-What are the benefits of cloud computing?
-What is IaaS, PaaS, and SaaS?
-What is EC2?
-What is an S3 bucket?
-What is Auto Scaling?
-What is an IAM role?
-What is a Load Balancer?
-What is AWS Lambda?
-What are security groups?
-How do you deploy an application on EC2?
+1. What are the benefits of cloud computing?
+2. What is IaaS, PaaS, and SaaS?
+3. What is EC2?
+4. What is an S3 bucket?
+5. What is Auto Scaling?
+6. What is an IAM role?
+7. What is a Load Balancer?
+8. What is AWS Lambda?
+9. What are security groups?
+10. How do you deploy an application on EC2?
 
 
 **Infrastructure as Code (IaC) – Terraform / Ansible**
 
-What is Infrastructure as Code (IaC)?
-What is Terraform used for?
-What are Terraform providers?
-Difference between Terraform apply and plan.
-What is a Terraform state file?
-What is Ansible, and how does it work?
-What is an Ansible playbook?
-Difference between Ansible roles and playbooks.
-How can you manage secrets in Ansible?
-Compare Ansible, Puppet, and Chef.
+1. What is Infrastructure as Code (IaC)?
+2. What is Terraform used for?
+3. What are Terraform providers?
+4. Difference between Terraform apply and plan.
+5. What is a Terraform state file?
+6. What is Ansible, and how does it work?
+7. What is an Ansible playbook?
+8. Difference between Ansible roles and playbooks.
+9. How can you manage secrets in Ansible?
+10. Compare Ansible, Puppet, and Chef.
 
 **Monitoring & Logging**
 
-Why is monitoring important in DevOps?
-What is Prometheus used for?
-What is Grafana used for?
-What are metrics vs logs vs traces?
-What is ELK Stack (Elasticsearch, Logstash, Kibana)?
-How does alerting work in Prometheus?
-What is distributed tracing?
-How can you monitor Docker containers?
-How do you check Jenkins logs?
-What are common monitoring metrics (CPU, latency, error rate, etc.)?
+1. Why is monitoring important in DevOps?
+2. What is Prometheus used for?
+3. What is Grafana used for?
+4. What are metrics vs logs vs traces?
+5. What is ELK Stack (Elasticsearch, Logstash, Kibana)?
+6. How does alerting work in Prometheus?
+7. What is distributed tracing?
+8. How can you monitor Docker containers?
+9. How do you check Jenkins logs?
+10. What are common monitoring metrics (CPU, latency, error rate, etc.)?
 
 **Security & Best Practices**
 
-What is DevSecOps?
-How do you store secrets securely in CI/CD?
-What is the purpose of SSH keys?
-What are some common security vulnerabilities in Docker?
-What is role-based access control (RBAC) in Kubernetes?
-What is least privilege principle?
-What are some DevOps best practices for scalability?
-What is blue-green deployment?
-What is canary deployment?
-How can you roll back a failed deployment?
+1. What is DevSecOps?
+2. How do you store secrets securely in CI/CD?
+3. What is the purpose of SSH keys?
+4. What are some common security vulnerabilities in Docker?
+5. What is role-based access control (RBAC) in Kubernetes?
+6. What is least privilege principle?
+7. What are some DevOps best practices for scalability?
+8. What is blue-green deployment?
+9. What is canary deployment?
+10. How can you roll back a failed deployment?
 
 **Scenario-Based (Advanced Thinking)**
 
-Your Jenkins build fails randomly — how will you debug it?
-Docker containers are consuming too much memory — how do you investigate?
-How would you set up a CI/CD pipeline for a MERN stack app?
-Your Kubernetes pod keeps restarting — what steps will you take to find the cause?
-Your website is slow after deployment — how would you troubleshoot?
-How would you implement zero downtime deployment?
-How can you automate infrastructure provisioning?
-How do you manage multi-environment (dev, staging, prod) configurations?
-What steps would you take to secure your CI/CD pipeline?
-Explain a complete DevOps workflow for a sample project.
+1. Your Jenkins build fails randomly — how will you debug it?
+2. Docker containers are consuming too much memory — how do you investigate?
+3. How would you set up a CI/CD pipeline for a MERN stack app?
+4. Your Kubernetes pod keeps restarting — what steps will you take to find the cause?
+5. Your website is slow after deployment — how would you troubleshoot?
+6. How would you implement zero downtime deployment?
+7. How can you automate infrastructure provisioning?
+8. How do you manage multi-environment (dev, staging, prod) configurations?
+9. What steps would you take to secure your CI/CD pipeline?
+10. Explain a complete DevOps workflow for a sample project.
